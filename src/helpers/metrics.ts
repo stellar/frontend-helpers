@@ -51,7 +51,7 @@ const getUserId = () => {
  * @param {object?} body An optional object containing event metadata
  * @returns {void}
  */
-export const emitMetric = (name: string, body?: any) => {
+const emitMetric = (name: string, body?: any) => {
   cache.push({
     /* eslint-disable camelcase */
     event_type: name,
@@ -61,4 +61,8 @@ export const emitMetric = (name: string, body?: any) => {
     /* eslint-enable camelcase */
   });
   uploadMetrics();
+};
+
+export const metrics = {
+  emitMetric,
 };
