@@ -1,3 +1,3 @@
-import { emitMetric } from "./metrics";
+import { emitMetric } from "helpers/metrics";
 
 export { emitMetric };
