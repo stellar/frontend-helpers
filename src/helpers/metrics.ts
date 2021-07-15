@@ -11,25 +11,32 @@ interface Event {
 
 const METRICS_ENDPOINT = "https://api.amplitude.com/2/httpapi";
 let cache: Event[] = [];
+let isTrackingDisabled = false;
 
-const uploadMetrics = throttle(() => {
+const uploadMetrics = throttle(async () => {
   const toUpload = cache;
   cache = [];
-  if (!process.env.REACT_APP_AMPLITUDE_KEY) {
+  if (!process.env.REACT_APP_AMPLITUDE_KEY || isTrackingDisabled) {
     // eslint-disable-next-line no-console
     console.log("Not uploading metrics", toUpload);
     return;
   }
-  fetch(METRICS_ENDPOINT, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      api_key: process.env.REACT_APP_AMPLITUDE_KEY,
-      events: toUpload,
-    }),
-  });
+
+  try {
+    await fetch(METRICS_ENDPOINT, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        api_key: process.env.REACT_APP_AMPLITUDE_KEY,
+        events: toUpload,
+      }),
+    });
+  } catch (e) {
+    isTrackingDisabled = true;
+    console.error(e);
+  }
 }, 500);
 
 const getUserId = () => {
@@ -51,7 +58,7 @@ const getUserId = () => {
  * @param {object?} body An optional object containing event metadata
  * @returns {void}
  */
-export const emitMetric = (name: string, body?: any) => {
+const emitMetric = (name: string, body?: any) => {
   cache.push({
     /* eslint-disable camelcase */
     event_type: name,
@@ -61,4 +68,8 @@ export const emitMetric = (name: string, body?: any) => {
     /* eslint-enable camelcase */
   });
   uploadMetrics();
+};
+
+export const metrics = {
+  emitMetric,
 };
