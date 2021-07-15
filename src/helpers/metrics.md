@@ -13,10 +13,10 @@ attempted to transmit.
 
 ## Usage
 
-```
+```ts
 import { metrics } from "@stellar/frontend-helpers";
 
 const handleClick = () => {
   metrics.emitMetric("button was clicked");
-}
+};
 ```
