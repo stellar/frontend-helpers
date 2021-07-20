@@ -9,9 +9,9 @@ import { Integrations } from "@sentry/tracing";
  * @returns {void}
  */
 const reportErrors = (projectName: string, releaseVersion?: string) => {
-  if (process.env.SENTRY_KEY) {
+  if (process.env.REACT_APP_SENTRY_KEY) {
     Sentry.init({
-      dsn: process.env.SENTRY_KEY,
+      dsn: process.env.REACT_APP_SENTRY_KEY,
       release: `${projectName}@${
         releaseVersion || process.env.npm_package_version
       }`,
