@@ -1,3 +1,4 @@
+import { errorReporting } from "./helpers/errorReporting";
 import { metrics } from "./helpers/metrics";
 
-export { metrics };
+export { errorReporting, metrics };
