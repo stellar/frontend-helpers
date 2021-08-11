@@ -13,7 +13,7 @@ import { Integrations } from "@sentry/tracing";
 interface ReportErrors {
   projectName: string;
   releaseVersion?: string;
-  tracingOrigins?: Array<string>;
+  tracingOrigins?: Array<string | RegExp>;
 }
 
 const reportErrors = ({
