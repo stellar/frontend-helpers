@@ -21,9 +21,9 @@ const reportErrors = ({
   releaseVersion,
   tracingOrigins,
 }: ReportErrors) => {
-  if (process.env.REACT_APP_SENTRY_KEY) {
+  if (window._env_.SENTRY_API_KEY) {
     Sentry.init({
-      dsn: process.env.REACT_APP_SENTRY_KEY,
+      dsn: window._env_.SENTRY_API_KEY,
       release: `${projectName}@${
         releaseVersion || process.env.npm_package_version
       }`,

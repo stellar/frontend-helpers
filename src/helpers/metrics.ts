@@ -16,7 +16,7 @@ let isTrackingDisabled = false;
 const uploadMetrics = throttle(async () => {
   const toUpload = cache;
   cache = [];
-  if (!process.env.REACT_APP_AMPLITUDE_KEY || isTrackingDisabled) {
+  if (!window._env_.AMPLITUDE_API_KEY || isTrackingDisabled) {
     // eslint-disable-next-line no-console
     console.log("Not uploading metrics", toUpload);
     return;
@@ -29,7 +29,7 @@ const uploadMetrics = throttle(async () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        api_key: process.env.REACT_APP_AMPLITUDE_KEY,
+        api_key: window._env_.AMPLITUDE_API_KEY,
         events: toUpload,
       }),
     });
