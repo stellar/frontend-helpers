@@ -1,6 +1,6 @@
 {
   "name": "@stellar/frontend-helpers",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "A library of functions commonly used across many Stellar frontend projects",
   "main": "build/index.js",
   "types": "build/index.d.ts",
