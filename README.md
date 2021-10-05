@@ -16,3 +16,11 @@ Markdown files to explain usage.
 ```
 yarn add @stellar/frontend-helpers
 ```
+
+## Adding helpers
+
+- Create a directory with the name of the helper method.
+- Inside the directory:
+  - create `index.ts` for the main code of the method,
+  - if necessary, add `README.md` file with context and/or instructions.
+- Export newly created helper to `src/index.ts`.
