@@ -1,10 +1,12 @@
 /**
  *
  * @param {unknown} error Error returned in `try catch`
+ * @param {string?} errorMessage An optional error message if error could not
+ * be parsed
  * @returns {Error}
  */
 
-export const getCatchError = (error: unknown): Error => {
+export const getCatchError = (error: unknown, errorMessage?: string): Error => {
   if (error instanceof Error) {
     return error;
   }
@@ -13,5 +15,5 @@ export const getCatchError = (error: unknown): Error => {
     return Error(error.toString());
   }
 
-  return Error("Something went wrong, please try again.");
+  return Error(errorMessage || "An error was unable to be parsed correctly");
 };
