@@ -1,11 +1,12 @@
 {
   "name": "@stellar/frontend-helpers",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "A library of functions commonly used across many Stellar frontend projects",
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "publish": "yarn build && npm publish --access public"
   },
   "repository": {
     "type": "git",
