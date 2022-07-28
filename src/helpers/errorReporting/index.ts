@@ -14,12 +14,14 @@ interface ReportErrors {
   projectName: string;
   releaseVersion?: string;
   tracingOrigins?: Array<string | RegExp>;
+  extra?: Sentry.BrowserOptions;
 }
 
 const reportErrors = ({
   projectName,
   releaseVersion,
   tracingOrigins,
+  extra,
 }: ReportErrors) => {
   if (window._env_.SENTRY_API_KEY) {
     Sentry.init({
@@ -35,6 +37,7 @@ const reportErrors = ({
           : new Integrations.BrowserTracing(),
       ],
       tracesSampleRate: 1.0,
+      ...(extra ? extra : {}),
     });
   }
 };
